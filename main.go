@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	
+	"os"
+
+	"github.com/joho/godotenv"
 )
 
 func HomeRouterHandler(w http.ResponseWriter, r *http.Request) {
@@ -13,8 +15,12 @@ func HomeRouterHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+
+	godotenv.Load()
+	port := os.Getenv("PORT")
+
     http.HandleFunc("/", HomeRouterHandler) // установим роутер
-    err := http.ListenAndServe(":9000", nil) // задаем слушать порт
+    err := http.ListenAndServe(port, nil) // задаем слушать порт
     if err != nil {
         log.Fatal("ListenAndServe: ", err)
     }
