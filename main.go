@@ -20,7 +20,7 @@ func main() {
 	port := os.Getenv("PORT")
 
     http.HandleFunc("/", HomeRouterHandler) // установим роутер
-    err := http.ListenAndServe(port, nil) // задаем слушать порт
+    err := http.ListenAndServe(":" + port, nil) // задаем слушать порт
     if err != nil {
         log.Fatal("ListenAndServe: ", err)
     }
